@@ -68,12 +68,13 @@ python3 flask_endpoints.py
 #### Endpoints
 
 ##### Get Libraries
-**URL**: /postcode/<string:postcode>/count/<int:count>
-**Method**: GET
-**URL** Params:
-**postcode**: The postcode to search from.
-**count**: The number of libraries to return.
-**Success Response**: **Code**: 200
+- **URL**: /postcode/<string:postcode>/count/<int:count>
+- **Method**: GET
+- **URL** Params:
+- **postcode**: The postcode to search from.
+- **count**: The number of libraries to return.
+- **Success Response**: 
+  - **Code**: 200
 
 ```json
 {
@@ -86,7 +87,8 @@ python3 flask_endpoints.py
 }
 ```
 
-**Failure Response**: **Code**: 400
+- **Failure Response**:
+  - **Code**: 400
 
 ```json
 {

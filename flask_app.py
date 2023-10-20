@@ -27,7 +27,7 @@ def get_libraries(postcode: str, count: int):
     :return: dictionary containing libraries, count, postcode and success or error
     """
 
-    with sqlite3.connect("library.db") as conn:
+    with sqlite3.connect(constants.DATABASE_FILE) as conn:
         database_handling.create_database(conn)
 
         oldest_date: datetime.date = database_handling.get_oldest_date(conn)
@@ -59,4 +59,4 @@ def get_libraries(postcode: str, count: int):
         }
 
 if __name__ == '__main__':
-    app.run(port = 8080)
+    app.run(port = constants.FLASK_PORT)

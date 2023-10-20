@@ -7,3 +7,5 @@ POSTCODE_REGEX: str = r"[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}"
 EARTH_RADIUS_KM: float = 6371.0
 SIX_MONTHS_IN_DAYS: int = 180
 DAYS_TO_REFRESH_DB: int = SIX_MONTHS_IN_DAYS
+DATABASE_FILE: str = "library.db"
+FLASK_PORT: int = 8080

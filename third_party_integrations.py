@@ -3,7 +3,7 @@ import requests
 
 # Custom Imports
 import constants
-import database_handling
+import utilities
 
 # Custom From Imports
 from models import Library, Point
@@ -22,7 +22,7 @@ def execute_library_sparql_query() -> list[Library]:
     headers = {
         "Accept": "application/sparql-results+json"
     }
-    sparql_query: str = database_handling.get_query_from_file("getLibraries.sparql")
+    sparql_query: str = utilities.get_query_from_file("getLibraries.sparql")
 
     response: requests.Response = requests.get(constants.SPARQL_WIKIDATA_URL, headers=headers, params={"query": sparql_query})
 

@@ -51,16 +51,16 @@ python3 cli.py
 ### API
 
 1. Navigate to the project directory.
-2. Run the cli.py script using the command:
+2. Run the main.py script using the command:
 
 ```bash
-python flask_endpoints.py
+python main.py
 ```
 
 *or*
 
 ```bash
-python3 flask_endpoints.py
+python3 main.py
 ```
 
 3. Access the application via a web browser or a tool like Postman at `http://127.0.0.1:5000`

@@ -59,8 +59,10 @@ def get_libraries(postcode: str, count: int):
                     "error": "Error getting libraries from wikidata"
                 }, 500
 
+            logger.log(__file__, "Adding libraries to database")
             database_handling.add_libraries_to_database(conn, libraries)
 
+        logger.log(__file__, "Getting latitude and longitude from postcode")
         if not third_party_integrations.check_postcode_valid(postcode):
             return {
                 "success": False,
@@ -69,6 +71,7 @@ def get_libraries(postcode: str, count: int):
         
         point: Point = third_party_integrations.get_latitude_and_longitude_from_postcode(postcode)
 
+        logger.log(__file__, "Getting libraries from database")
         libraries: list[Library] = database_handling.get_libraries_from_database(conn)
 
         nearest_libraries: list[Library] = utilities.find_nearest_n_libraries(libraries, point, count)

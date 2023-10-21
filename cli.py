@@ -68,7 +68,7 @@ def main() -> None:
         None
     """
 
-    with sqlite3.connect("library.db") as conn:
+    with sqlite3.connect(constants.DATABASE_FILE) as conn:
         database_handling.create_database(conn)
         
         oldest_date: datetime.date = database_handling.get_oldest_date(conn)

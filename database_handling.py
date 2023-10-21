@@ -1,5 +1,6 @@
 # Standard Library Imports
 import datetime
+import os
 import sqlite3
 
 # Custom Imports
@@ -18,7 +19,8 @@ def create_database(conn: sqlite3.Connection) -> None:
         None
     """
 
-    query: str = utilities.get_query_from_file("createLibraryTable.sql")
+    query_file: str = os.path.join("sql", "createLibraryTable.sql")
+    query: str = utilities.get_query_from_file(query_file)
 
     conn.execute(query)
 
@@ -36,7 +38,8 @@ def get_oldest_date(conn: sqlite3.Connection) -> datetime.date:
     
     cursor: sqlite3.Cursor = conn.cursor()
 
-    query: str = utilities.get_query_from_file("getOldestDate.sql")
+    query_file: str = os.path.join("sql", "getOldestDate.sql")
+    query: str = utilities.get_query_from_file(query_file)
 
     cursor.execute(query)
     oldest_date = cursor.fetchone()[0]
@@ -58,7 +61,8 @@ def clear_records(conn: sqlite3.Connection) -> None:
 
     cursor: sqlite3.Cursor = conn.cursor()
 
-    query: str = utilities.get_query_from_file("clearLibraries.sql")
+    query_file: str = os.path.join("sql", "clearLibraries.sql")
+    query: str = utilities.get_query_from_file(query_file)
 
     cursor.execute(query)
 
@@ -77,7 +81,8 @@ def add_libraries_to_database(conn: sqlite3.Connection, libraries: list[Library]
 
     cursor: sqlite3.Cursor = conn.cursor()
 
-    query: str = utilities.get_query_from_file("addLibrary.sql")
+    query_file: str = os.path.join("sql", "addLibrary.sql")
+    query: str = utilities.get_query_from_file(query_file)
 
     for library in libraries:
         cursor.execute(query, (library.name, library.point.latitude, library.point.longitude))
@@ -96,7 +101,8 @@ def get_libraries_from_database(conn: sqlite3.Connection) -> list[Library]:
 
     cursor: sqlite3.Cursor = conn.cursor()
 
-    query: str = utilities.get_query_from_file("getLibraries.sql")
+    query_file: str = os.path.join("sql", "getLibraries.sql")
+    query: str = utilities.get_query_from_file(query_file)
 
     cursor.execute(query)
 

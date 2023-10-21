@@ -1,4 +1,5 @@
 # Standard Library Imports
+import os
 import sys
 
 # Standard From Library Imports
@@ -30,7 +31,9 @@ def execute_library_sparql_query() -> list[Library]:
         "Accept": "application/sparql-results+json",
         'User-Agent': user_agent
     }
-    sparql_query: str = utilities.get_query_from_file("getLibraries.sparql")
+
+    query_file: str = os.path.join("sparql", "getLibraries.sparql")
+    sparql_query: str = utilities.get_query_from_file(query_file)
 
     response: requests.Response = requests.get(constants.SPARQL_WIKIDATA_URL, headers=headers, params={"query": sparql_query})
 

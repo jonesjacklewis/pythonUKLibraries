@@ -1,3 +1,9 @@
+# Standard Library Imports
+import sys
+
+# Standard From Library Imports
+from typing import Dict
+
 # Third Party Imports
 import requests
 
@@ -18,9 +24,11 @@ def execute_library_sparql_query() -> list[Library]:
     Returns:
         list[Library] - the libraries from wikidata
     """
-    
-    headers = {
-        "Accept": "application/sparql-results+json"
+
+    user_agent: str = "WDQS-example Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
+    headers: Dict[str, str] = {
+        "Accept": "application/sparql-results+json",
+        'User-Agent': user_agent
     }
     sparql_query: str = utilities.get_query_from_file("getLibraries.sparql")
 

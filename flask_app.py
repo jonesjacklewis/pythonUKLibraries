@@ -17,6 +17,11 @@ from models import Point, Library
 # Create Flask app
 app = Flask(__name__)
 
+# crreate endpoint / for hello world
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
 # Create endpoint for getting libraries
 @app.route('/postcode/<string:postcode>/count/<int:count>', methods=['GET'])
 def get_libraries(postcode: str, count: int):

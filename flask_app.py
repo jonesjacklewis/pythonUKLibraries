@@ -8,6 +8,7 @@ from flask import Flask
 # Custom Imports
 import constants
 import database_handling
+import logger
 import third_party_integrations
 import utilities
 
@@ -32,15 +33,31 @@ def get_libraries(postcode: str, count: int):
     :return: dictionary containing libraries, count, postcode and success or error
     """
 
+    logger.log(__file__, f"Getting libraries for postcode {postcode} and count {count}")
+
     with sqlite3.connect(constants.DATABASE_FILE) as conn:
+        logger.log(__file__, "Connected to database")
         database_handling.create_database(conn)
+
+        logger.log(__file__, "Checking if database needs to be refreshed")
 
         oldest_date: datetime.date = database_handling.get_oldest_date(conn)
 
         if utilities.check_date_older_than_days(oldest_date, constants.DAYS_TO_REFRESH_DB):
+            logger.log(__file__, "Database needs to be refreshed")
+            logger.log(__file__, "Clearing records from database")
             database_handling.clear_records(conn)
         
-            libraries: list[Library] = third_party_integrations.execute_library_sparql_query()
+            logger.log(__file__, "Getting libraries from wikidata")
+
+            try:
+                libraries: list[Library] = third_party_integrations.execute_library_sparql_query()
+            except Exception as e:
+                logger.log(__file__, f"Error getting libraries from wikidata: {e}")
+                return {
+                    "success": False,
+                    "error": "Error getting libraries from wikidata"
+                }, 500
 
             database_handling.add_libraries_to_database(conn, libraries)
 

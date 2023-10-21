@@ -9,3 +9,4 @@ SIX_MONTHS_IN_DAYS: int = 180
 DAYS_TO_REFRESH_DB: int = SIX_MONTHS_IN_DAYS
 DATABASE_FILE: str = "library.db"
 FLASK_PORT: int = 8000
+LOG_FILE: str = "log.txt"

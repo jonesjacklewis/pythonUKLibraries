@@ -4,6 +4,8 @@ import sqlite3
 
 # Third Party From Imports
 from flask import Flask
+from flask_cors import CORS, cross_origin
+
 
 # Custom Imports
 import constants
@@ -17,14 +19,19 @@ from models import Point, Library
 
 # Create Flask app
 app = Flask(__name__)
+cors = CORS(app)
+
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # crreate endpoint / for hello world
 @app.route('/')
+@cross_origin()
 def hello_world():
     return 'Hello, World!'
 
 # Create endpoint for getting libraries
 @app.route('/postcode/<string:postcode>/count/<int:count>', methods=['GET'])
+@cross_origin()
 def get_libraries(postcode: str, count: int):
     """
     Endpoint for getting libraries from database
@@ -84,6 +91,7 @@ def get_libraries(postcode: str, count: int):
         }
 
 @app.route('/latitude/<string:latitude>/longitude/<string:longitude>/count/<int:count>', methods=['GET'])
+@cross_origin()
 def get_libraries_by_coordinates(latitude: str, longitude: str, count: int):
     """
     Endpoint for getting libraries from database by latitutde and longitutde

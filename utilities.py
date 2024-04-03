@@ -10,6 +10,39 @@ import constants
 # Custom From Imports
 from models import Point, Library, DistancedLibrary
 
+def is_valid_latitude(latitude: str) -> bool:
+    """
+    Checks if a string is a valid latitude
+
+    Parameters:
+        latitude (str): the string to check
+    Returns:
+        bool - True if the string is a valid latitude, False otherwise
+    """
+
+    try:
+        latitude_float: float = float(latitude)
+        return -90 <= latitude_float <= 90
+    except ValueError:
+        return False
+
+def is_valid_longitude(longitude: str) -> bool:
+    """
+    Checks if a string is a valid longitude
+
+    Parameters:
+        longitude (str): the string to check
+    Returns:
+        bool - True if the string is a valid longitude, False otherwise
+    """
+
+    try:
+        longitude_float: float = float(longitude)
+        return -180 <= longitude_float <= 180
+    except ValueError:
+        return False
+
+
 def get_query_from_file(filename: str) -> str:
     """
     Gets a query from a file
